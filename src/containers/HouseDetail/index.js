@@ -17,7 +17,7 @@ import {ButtonView} from '../../reuseableComponents';
 import {HOUSE, HOUSE_DETAIL} from '../../actions/ActionTypes';
 import {request} from '../../actions/ServiceAction';
 import constant from '../../constants';
-
+import _ from 'lodash';
 class HomeDetail extends Component {
   state = {
     isLoaded: false,
@@ -36,7 +36,7 @@ class HomeDetail extends Component {
       {},
       false,
       data => {
-        console.log('_getHouse ********* : ', data);
+        // console.log('_getHouse ********* : ', data);
       },
       undefined,
       false,
@@ -45,8 +45,10 @@ class HomeDetail extends Component {
 
   render() {
     const {houseDetail} = this.props;
-    console.log('houseDetail : ', houseDetail);
-    // return null;
+
+    if (_.isUndefined(houseDetail) || houseDetail == null) {
+      return null;
+    }
     return (
       <Fragment>
         <SafeAreaView

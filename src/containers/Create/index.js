@@ -37,7 +37,6 @@ class Create extends Component {
   oncreateSubmit = () => {
     const formData = this.formHandler.onSubmitForm();
     formData && this.createRequest(formData);
-    console.log('formData : ', formData);
   };
 
   _getHouse = () => {
@@ -48,7 +47,7 @@ class Create extends Component {
       {},
       false,
       data => {
-        console.log('_getHouse ********* : ', data);
+        // console.log('_getHouse ********* : ', data);
       },
       undefined,
       false,

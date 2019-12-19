@@ -17,17 +17,11 @@ import {ButtonView} from '../../reuseableComponents';
 import {HOUSE} from '../../actions/ActionTypes';
 import {request} from '../../actions/ServiceAction';
 import constant from '../../constants';
-import Swipeout from 'react-native-swipeout';
+// import Swipeout from 'react-native-swipeout';
+import {SwipeListView} from 'react-native-swipe-list-view';
+
 import _ from 'lodash';
-var swipeoutBtns = [
-  {
-    text: 'Delete',
-    onPress: index => {
-      console.log('index : ', index);
-      alert('show');
-    },
-  },
-];
+
 class Home extends Component {
   state = {
     isLoaded: false,
@@ -37,11 +31,21 @@ class Home extends Component {
     this._getHouse();
   }
 
-  state = {isOn: false};
-  _onStatusChange = e => {
-    this.setState({isOn: e.nativeEvent.isOn});
+  _deleteHouse = id => {
+    this.props.request(
+      HOUSE,
+      `${constant.house}/${id}`,
+      'delete',
+      {},
+      false,
+      data => {
+        // console.log('_deleteHouse ********* : ', data);
+        this._getHouse();
+      },
+      undefined,
+      false,
+    );
   };
-
   _getHouse = () => {
     this.props.request(
       HOUSE,
@@ -57,37 +61,51 @@ class Home extends Component {
     );
   };
   _renderItem = ({item, index}) => {
-    console.log('_renderItem : ', item);
     return (
-      <Swipeout
-        right={swipeoutBtns}
-        style={{backgroundColor: 'white'}}
-        onOpen={(sectionID, rowId, index) => {
-          console.log(
-            'sectionID',
-            sectionID,
-            'rowId : ',
-            rowId,
-            'index : ',
-            index,
-          );
-        }}>
-        <ButtonView
-          style={{
-            paddingHorizontal: 10,
-            flex: 1,
-            paddingVertical: 20,
-            borderWidth: 1,
-            borderColor: 'black',
-            opacity: 0.5,
-          }}
-          onPress={() => push('houseDetail', {data: item})}>
+      <ButtonView
+        style={{
+          paddingHorizontal: 10,
+          flex: 1,
+          paddingVertical: 20,
+          borderWidth: 1,
+          borderColor: 'black',
+          opacity: 0.5,
+          flexDirection: 'row',
+        }}
+        onPress={() => push('houseDetail', {data: item})}>
+        <View style={{justifyContent: 'space-between', flex: 1}}>
           <Text>owner : {item.owner} </Text>
           <Text>Address :{item.address} </Text>
           <Text>Price : {item.price}</Text>
           <Text>Area : {item.area} </Text>
+        </View>
+        <ButtonView
+          onPress={() => {
+            console.log('data : ', item);
+            this._deleteHouse(item._id);
+          }}>
+          <Text style={{fontSize: 20, fontWeight: 'bold', color: 'red'}}>
+            Delete
+          </Text>
         </ButtonView>
-      </Swipeout>
+      </ButtonView>
+    );
+  };
+  renderHiddenItem = (data, rowMap) => {
+    return (
+      <ButtonView
+        style={{
+          justifyContent: 'center',
+          alignItems: 'flex-end',
+          flex: 1,
+        }}
+        onPress={() => {
+          // this._deleteHouse(data.item._id);
+        }}>
+        <Text style={{fontSize: 20, fontWeight: 'bold', color: 'red'}}>
+          Delete
+        </Text>
+      </ButtonView>
     );
   };
   render() {
@@ -100,11 +118,12 @@ class Home extends Component {
     return (
       <Fragment>
         <SafeAreaView>
-          <FlatList
-            data={houseList && houseList.houses.length && houseList.houses}
+          <SwipeListView
+            data={houseList && houseList.houses}
+            // data={[{key: 1}, {key: 2}]}
             renderItem={this._renderItem}
-            keyExtractor={item => item.id}
-            // ItemSeparatorComponent = {}
+            // renderHiddenItem={this.renderHiddenItem}
+            rightOpenValue={-75}
           />
         </SafeAreaView>
       </Fragment>

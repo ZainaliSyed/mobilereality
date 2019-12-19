@@ -44,3 +44,4 @@ export const LOGOUT = 'LOGOUT';
 export const CREATE_HOUSE = createRequestTypes('CREATE_HOUSE');
 export const HOUSE = createRequestTypes('HOUSE');
 export const HOUSE_DETAIL = createRequestTypes('HOUSE_DETAIL');
+export const DELETE_HOUSE = createRequestTypes('DELETE_HOUSE');
