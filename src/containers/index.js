@@ -8,5 +8,6 @@
 import Home from './Home';
 import Demo from './Demo';
 import Create from './Create';
+import HouseDetail from './HouseDetail';
 
-export {Home, Demo, Create};
+export {Home, Demo, Create, HouseDetail};

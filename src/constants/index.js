@@ -6,20 +6,21 @@
 //  Copyright © 2019 Retrocube. All rights reserved.
 //
 const constant = {
-    //App Constants
-    socketIP: "192.34.60.217",
-    socketPort: "1233",
-    baseURL: "http://192.34.60.217:5000",
-    baseImageURL: "http://192.168.3.143:5000/",
-    applicationToken: "api.Pd*!(5675",
-    //Services Constants
-    //      login : "api/login"
-    //Socket Constants
-    //     failure: { action: "failure", packet_code: 9900 },
-    //Location Constants
-    LOCATION_TIME_OUT: 10000,
-    LOCATION_MAX_AGE: 1000,
-    LOCATION_HIGH_ACCURACY: false
+  //App Constants
+  //   socketIP: '192.34.60.217',
+  //   socketPort: '1233',
+  baseURL: 'http://mr-test-backend.sadek.usermd.net/',
+  baseImageURL: 'http://192.168.3.143:5000/',
+  applicationToken: 'api.Pd*!(5675',
+  //Services Constants
+  house: 'houses',
+  houseDetail: 'houses',
+  //Socket Constants
+  //     failure: { action: "failure", packet_code: 9900 },
+  //Location Constants
+  LOCATION_TIME_OUT: 10000,
+  LOCATION_MAX_AGE: 1000,
+  LOCATION_HIGH_ACCURACY: false,
 };
 
 export default constant;

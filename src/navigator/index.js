@@ -7,7 +7,7 @@
 //
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {dyanimcTitle} from './navigatorHelper';
-import {Home, Demo, Create} from '../containers';
+import {Home, Demo, Create, HouseDetail} from '../containers';
 
 import {createStackNavigator} from 'react-navigation-stack';
 import {ButtonView} from '../reuseableComponents';
@@ -42,6 +42,10 @@ const HomeStack = createStackNavigator({
   },
   create: {
     screen: Create,
+    ...showTitle('Create'),
+  },
+  houseDetail: {
+    screen: HouseDetail,
   },
 });
 
